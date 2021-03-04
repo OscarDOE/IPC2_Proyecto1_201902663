@@ -34,11 +34,17 @@ class ListaMatrices:
             temporal = temporal.siguiente
         return None    
 
-
+    def getcantidad():
+        temporal = self.primero
+        c=0
+        while temporal is not None:
+            
+            temporal = temporal.siguiente
         #ESPECIFICOS
 
     def mostrarnombresmatrices(self):
         temporal = self.primero
         while temporal is not None:
             print("NOMBRE:",temporal.nombre)
-        temporal = temporal.siguiente    
+            temporal = temporal.siguiente    
+            

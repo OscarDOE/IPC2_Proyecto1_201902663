@@ -1,0 +1,11 @@
+"Nombre Completo"[shape=box,style=bold, color=red]
+Carné[shape=box,style=bold, color=red]
+Curso[shape=box,style=bold, color=red]
+Sección[shape=box,style=bold, color=red]
+"Datos Personales" -> "Nombre Completo", Carné, Curso
+"Nombre Completo" -> "Oscar Daniel Oliva España"
+Carné -> 201902663
+Curso -> "Lenguajes Formales"
+"Lenguajes Formales" -> Sección
+Sección -> "B-"
+}

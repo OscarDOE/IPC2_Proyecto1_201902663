@@ -20,10 +20,10 @@ def menu():
     global opcion
     print("------Menu Principal------")
     print("1. Cargar Archivos")
-    print("2. Desplegar Lista Ordenada")
-    print("3. Desplegar Búsquedas")
-    print("4. Desplegar Todas")
-    print("5. Desplegar Todas a Archivo")
+    print("2. Procesar Datos")
+    print("3. Archivo de Salida")
+    print("4. Datos del Estudiante")
+    print("5. Graficar")
     print("6. Salir")
     opcion = 0
     opcion = int(input("Seleccione una opción\n"))
@@ -95,9 +95,14 @@ def Procesar_Datos():
     print("----------------------------")
     print("Opcion 2")
     print("----------------------------")
+    print("Procesando Datos")
+    print("Transformando las matrices")
+    menu()
 
 def Escribir_Salida():
+    print("----------------------------")
     print("Opcion 3")
+    print("----------------------------")
 
 def Mostrar_Datos():
     print("----------------------------")
@@ -113,15 +118,37 @@ def Grafica():
     print("Opcion 5")
     print("----------------------------")
     Matrices.mostrarnombresmatrices()
-    input("Escoja una matriz a graficar")
+    x = input("Escriba literalmente el nombre de la matriz que desea graficar")
+    f = None
+    try:    
+        f = Matrices.getNodoMatriz(x).nombre
+    except:
+        print("No se ha ingresado el nombre correctamente")  
+        menu()  
+    if x == f:
+        Grafo = Matrices.getNodoMatriz(x)
+        file = open("tttt.dot","w") 
+        mensaje += "digraph grafica{\n"
+        mensaje += "\"Matrices\"[shape=box,style=bold,fillcolor=black, color=orange]\n"
+        mensaje += "\"Matrices\" "
 
-    with open("1fcdc.dot","w") as f:    
-        f.write("digraph grafica{\n")
+    '''with open("1fcdc.dot","w") as f:    
 
+        mensaje = ""
+        mensaje += "digraph grafica{\n"
+        mensaje+="\"Matrices\"[shape=box,style=bold,fillcolor=black, color=orange]\n"
+        #Matrices.mostrardatos()
+        try:
+            if x == Matrices.getNodoMatriz(x).nombre:
+                print("Se graficará la matriz:",x)
+                g = Matrices.getNodoMatriz(x)
 
-        f.write("\"Matrices\"[shape=box,style=bold,fillcolor=black, color=orange]\n")
-        Matrices.mostrardatos
-
+            else:    
+                print("No ha seleccionado ninguna matriz correctamente")
+                menu()
+        except:
+            print("No ha escrito la matriz correctamente")
+            menu()
         
         f.write("\"Nombre Completo\"[shape=box,style=bold, color=red]\n")
 
@@ -136,7 +163,7 @@ def Grafica():
         f.write("\"Lenguajes Formales\" -> Sección\n")
         f.write("Sección -> \"B-\"\n")
         f.write("}\n")
-    os.system('dot -Tjpg 1fcdc.dot -o graficac1.png')
+    os.system('dot -Tjpg 1fcdc.dot -o graficac1.png')'''
 
 
 def Salir():
