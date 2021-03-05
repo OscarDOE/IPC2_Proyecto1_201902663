@@ -78,9 +78,9 @@ def Cargar_Archivos():
             posiciones.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
             valor = int(subdatos.text)
             if valor != 0:
-                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
+                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),1,int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
             else:
-                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
+                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),0,int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
         
         ameter = Matrices.getNodoMatriz(str.lower(datos.attrib['nombre']))
         ametercode = MatrizCode.getNodoMatriz(str.lower(datos.attrib['nombre']))
@@ -106,6 +106,7 @@ def Escribir_Salida():
     print("----------------------------")
     print("Opcion 3")
     print("----------------------------")
+
 
 def Mostrar_Datos():
     print("----------------------------")
@@ -140,11 +141,13 @@ def Grafica():
         tamanio = Grafo.datos.gettotal()
         columnas = Grafo.columnas
         filas = Grafo.filas
+        print("FILAS:", Grafo.filas,"COLUMNAS:",Grafo.columnas)
         print("TAMAÑO:",tamanio,"COLUMNAS:",columnas)
         print("IIIIIIIIIIIIIIII")
         valor = None
         filas_pasada = 0
-        for i in range(filas):
+        for i in range(columnas):
+            print("I:", i)
             print("X")
             valorfilas = Grafo.datos.recorrercadan(filas_pasada)
             print("VALORX:",valorfilas) 
@@ -152,14 +155,13 @@ def Grafica():
             col = "X"+str(i)
             mensaje += col+"[label=\""+str(valorfilas)+"\"]"+"\n"
             mensaje += str(f)+"->"+col+"\n"
-            for j in range(columnas):
+            for j in range(filas):
+                print("J:",j)
                 print("Y")
                 jota += columnas
-                recorrido_columna = Grafo.datos.recorrerm(filas_pasada,jota,Grafo.columnas)
-                
+                recorrido_columna = Grafo.datos.recorrerm(filas_pasada,jota,Grafo.filas)
                 print("VALORY:",recorrido_columna)
                 fil = "X"+str(i)+"Y"+str(j)
-                
                 if recorrido_columna is None:
                     l= 0
                 else:    

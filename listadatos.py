@@ -65,7 +65,7 @@ class ListaDatos:
             else:
                 c += 1
             temporal = temporal.siguiente    
-
+#C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\y.xml
     def recorrerm (self,columna_va, filas_va,columnas):
         temporal = self.primero
         c = 0
