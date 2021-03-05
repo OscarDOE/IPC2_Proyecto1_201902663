@@ -65,19 +65,22 @@ def Cargar_Archivos():
     #MatrizCode = ListaMatrices()
     posicionesCode = None
     c = 0
+    print("IIIIIIIIIIIIIIIIIIII")
+    for i in range(1):
+        print(i)
     for datos in root:
         #print("NOMBRE: ",datos.attrib['nombre'], "N:", datos.attrib['n'], "M:",datos.attrib['m'])
-        Matrices.insertar(datos.attrib['nombre'],datos.attrib['n'],datos.attrib['m'])
-        MatrizCode.insertar(datos.attrib['nombre'],datos.attrib['n'],datos.attrib['m'])
+        Matrices.insertar(datos.attrib['nombre'],int(datos.attrib['n']),int(datos.attrib['m']))
+        MatrizCode.insertar(datos.attrib['nombre'],int(datos.attrib['n']),int(datos.attrib['m']))
         posiciones = ListaDatos()
         posicionesCode = ListaDatos()
         for subdatos in datos:
-            posiciones.insertar(subdatos.attrib['x'],subdatos.attrib['y'],subdatos.text,datos.attrib['n'],datos.attrib['m'])
+            posiciones.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
             valor = int(subdatos.text)
             if valor != 0:
-                posicionesCode.insertar(subdatos.attrib['x'],subdatos.attrib['y'],1,datos.attrib['n'],datos.attrib['m'])
+                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
             else:
-                posicionesCode.insertar(subdatos.attrib['x'],subdatos.attrib['y'],0,datos.attrib['n'],datos.attrib['m'])
+                posicionesCode.insertar(int(subdatos.attrib['x']),int(subdatos.attrib['y']),int(subdatos.text),int(datos.attrib['n']),int(datos.attrib['m']),datos.attrib['nombre'])
         
         ameter = Matrices.getNodoMatriz(str.lower(datos.attrib['nombre']))
         ametercode = MatrizCode.getNodoMatriz(str.lower(datos.attrib['nombre']))
@@ -118,19 +121,71 @@ def Grafica():
     print("Opcion 5")
     print("----------------------------")
     Matrices.mostrarnombresmatrices()
-    x = input("Escriba literalmente el nombre de la matriz que desea graficar")
+    x = input("Escriba literalmente el nombre de la matriz que desea graficar: ")
     f = None
     try:    
         f = Matrices.getNodoMatriz(x).nombre
+        print("F:",f)
     except:
         print("No se ha ingresado el nombre correctamente")  
         menu()  
     if x == f:
         Grafo = Matrices.getNodoMatriz(x)
-        file = open("tttt.dot","w") 
-        mensaje += "digraph grafica{\n"
+        file = open("grafica.dot","w") 
+        mensaje = "digraph grafica{\n"
         mensaje += "\"Matrices\"[shape=box,style=bold,fillcolor=black, color=orange]\n"
-        mensaje += "\"Matrices\" "
+        mensaje += "\"Matrices\" -> "+str(f)+"\n"
+        mensaje += str(f)+"->"+"\"n="+str(Grafo.filas)+"\"\n"
+        mensaje += str(f)+"->"+"\"m="+str(Grafo.columnas)+"\"\n"
+        tamanio = Grafo.datos.gettotal()
+        columnas = Grafo.columnas
+        filas = Grafo.filas
+        print("TAMAÑO:",tamanio,"COLUMNAS:",columnas)
+        print("IIIIIIIIIIIIIIII")
+        valor = None
+        filas_pasada = 0
+        for i in range(filas):
+            print("X")
+            valorfilas = Grafo.datos.recorrercadan(filas_pasada)
+            print("VALORX:",valorfilas) 
+            jota = 0
+            col = "X"+str(i)
+            mensaje += col+"[label=\""+str(valorfilas)+"\"]"+"\n"
+            mensaje += str(f)+"->"+col+"\n"
+            for j in range(columnas):
+                print("Y")
+                jota += columnas
+                recorrido_columna = Grafo.datos.recorrerm(filas_pasada,jota,Grafo.columnas)
+                
+                print("VALORY:",recorrido_columna)
+                fil = "X"+str(i)+"Y"+str(j)
+                
+                if recorrido_columna is None:
+                    l= 0
+                else:    
+                    mensaje += fil+"[label=\""+str(recorrido_columna)+"\"]"+"\n"
+                    if j == 0:
+                        mensaje += col+"->"+fil+"\n"
+                    else:
+                        fil2 = "X"+str(i)+"Y"+str(j-1)
+                        mensaje += fil2+"->"+fil+"\n" 
+            filas_pasada += 1   
+        mensaje += "}"
+        file.write(mensaje)
+        file.close()
+        os.system('dot -Tjpg grafica.dot -o grafica.png')
+
+
+
+
+
+
+
+
+
+
+
+
 
     '''with open("1fcdc.dot","w") as f:    
 

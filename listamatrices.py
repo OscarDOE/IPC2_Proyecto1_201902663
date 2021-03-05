@@ -36,10 +36,11 @@ class ListaMatrices:
 
     def getcantidad():
         temporal = self.primero
-        c=0
+        contador = 0
         while temporal is not None:
-            
+            contador += 1
             temporal = temporal.siguiente
+        return contador 
         #ESPECIFICOS
 
     def mostrarnombresmatrices(self):
