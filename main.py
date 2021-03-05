@@ -177,52 +177,6 @@ def Grafica():
         file.close()
         os.system('dot -Tjpg grafica.dot -o grafica.png')
 
-
-
-
-
-
-
-
-
-
-
-
-
-    '''with open("1fcdc.dot","w") as f:    
-
-        mensaje = ""
-        mensaje += "digraph grafica{\n"
-        mensaje+="\"Matrices\"[shape=box,style=bold,fillcolor=black, color=orange]\n"
-        #Matrices.mostrardatos()
-        try:
-            if x == Matrices.getNodoMatriz(x).nombre:
-                print("Se graficará la matriz:",x)
-                g = Matrices.getNodoMatriz(x)
-
-            else:    
-                print("No ha seleccionado ninguna matriz correctamente")
-                menu()
-        except:
-            print("No ha escrito la matriz correctamente")
-            menu()
-        
-        f.write("\"Nombre Completo\"[shape=box,style=bold, color=red]\n")
-
-
-        f.write("Carné[shape=box,style=bold, color=red]\n")
-        f.write("Curso[shape=box,style=bold, color=red]\n")
-        f.write("Sección[shape=box,style=bold, color=red]\n")
-        f.write("\"Datos Personales\" -> \"Nombre Completo\", Carné, Curso\n")
-        f.write("\"Nombre Completo\" -> \"Oscar Daniel Oliva España\"\n")
-        f.write("Carné -> 201902663\n")
-        f.write("Curso -> \"Lenguajes Formales\"\n") 
-        f.write("\"Lenguajes Formales\" -> Sección\n")
-        f.write("Sección -> \"B-\"\n")
-        f.write("}\n")
-    os.system('dot -Tjpg 1fcdc.dot -o graficac1.png')'''
-
-
 def Salir():
     print("----------------------------")
     print("Opcion 6")
