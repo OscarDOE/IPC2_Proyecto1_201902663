@@ -1,6 +1,6 @@
-from datos import posicion
+from datosresultante import posicion
 
-class ListaDatos:
+class ListaDatosResultantes:
     def __init__(self):
         self.primero = None
 
@@ -29,23 +29,6 @@ class ListaDatos:
             temporal = temporal.siguiente
         return None
 
-
-    def getNodoFila(self,fila,columna):
-        #print("COLUMNA:",columna)
-        temporal = self.primero
-        while temporal is not None:
-            #print("VALORTEMPORAL X:",temporal.x)
-            #print("VALORTEMPORAL Y:",temporal.y)
-            if temporal.y == columna:
-                if int(temporal.x) == int(fila):
-                    return temporal
-            temporal = temporal.siguiente           
-
-    def YaPaso(self):
-        temporal = self.primero
-        while temporal is not None:
-            temporal = temporal.siguiente                  
-
     def gettotal(self):
         temporal = self.primero
         contador = 0
@@ -53,6 +36,14 @@ class ListaDatos:
             contador += 1
             temporal = temporal.siguiente
         return contador   
+
+    #def recorrer (self, hasta):
+   #     temporal = self.primero
+   #     i = 0
+    #    while i <= hasta:
+     #       if i == hasta:
+      #          return temporal
+       #     temporal = temporal.siguiente
 
 #Se utilizó para las gráficas, recorría cada espacio de la primera fila
     def recorrercadan(self,pasadas):
@@ -117,25 +108,15 @@ class ListaDatos:
                     temporal.anterior = eliminando.anterior
                     anterior = eliminando.anterior
                     anterior.siguiente = temporal
+                   # temporal = eliminando.anterior    
+                   # temporal.siguiente = eliminando.siguiente
+                   # siguiente = eliminando.siguiente
+                   # siguiente.anterior = temporal
                     eliminando.siguiente = None
                     eliminando.anterior = None
                     i += 1
             else:
                 break
-
-    def eliminarfila (self,fila,columna):
-        temporal = self.primero
-        while temporal is not None:
-            if temporal.x == fila:
-                eliminando = temporal
-                temporal = eliminando.anterior
-                temporal.siguiente = eliminando.siguiente
-                siguiente = eliminando.siguiente
-                siguiente.anterior = temporal
-                eliminando.siguiente = None
-                eliminando.anterior = None
-            temporal = temporal.siguiente    
-                    
 
             '''elif i >= desde and i < hasta:
                 auxiliar = temporal
@@ -154,4 +135,3 @@ class ListaDatos:
                 break
             else: 
                 temporal = temporal.siguiente'''
-

@@ -8,6 +8,4 @@ class posicion:
         self.nombrematriz = nombrematriz
         self.siguiente = None
         self.anterior = None
-        self.flag = False
-        self.frecuencia = 0
         #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\x.xml

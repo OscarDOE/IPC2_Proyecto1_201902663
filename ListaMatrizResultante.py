@@ -1,6 +1,6 @@
-from matrices import matriz
+from matrizresultante import matriz
 
-class ListaMatrices:
+class ListaMatricesResultantes:
     def __init__(self):
         self.primero = None
 
@@ -16,6 +16,8 @@ class ListaMatrices:
             nuevo.anterior = temporal
     #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\x.xml
     #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\y.xml
+    
+    
     def mostrardatos(self):
         temporal = self.primero
         while temporal is not None:
@@ -69,5 +71,3 @@ class ListaMatrices:
         i = 0
         while temporal is not None:
             temporal = temporal.siguiente   
-
-            

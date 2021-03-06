@@ -1,38 +1,24 @@
 digraph grafica{
 "Matrices"[shape=box,style=bold,fillcolor=black, color=orange]
-"Matrices" -> Ejemplo
-Ejemplo->"n=5"
-Ejemplo->"m=4"
+"Matrices" -> MatrizPrueba2
+MatrizPrueba2->"n=3"
+MatrizPrueba2->"m=3"
 X0[label="2"]
-Ejemplo->X0
-X0Y0[label="3"]
+MatrizPrueba2->X0
+X0Y0[label="0"]
 X0->X0Y0
-X0Y1[label="1"]
+X0Y1[label="9"]
 X0Y0->X0Y1
-X0Y2[label="0"]
-X0Y1->X0Y2
 X1[label="3"]
-Ejemplo->X1
-X1Y0[label="4"]
+MatrizPrueba2->X1
+X1Y0[label="8"]
 X1->X1Y0
-X1Y1[label="0"]
+X1Y1[label="8"]
 X1Y0->X1Y1
-X1Y2[label="0"]
-X1Y1->X1Y2
-X2[label="0"]
-Ejemplo->X2
+X2[label="3"]
+MatrizPrueba2->X2
 X2Y0[label="0"]
 X2->X2Y0
-X2Y1[label="1"]
+X2Y1[label="0"]
 X2Y0->X2Y1
-X2Y2[label="3"]
-X2Y1->X2Y2
-X3[label="4"]
-Ejemplo->X3
-X3Y0[label="2"]
-X3->X3Y0
-X3Y1[label="5"]
-X3Y0->X3Y1
-X3Y2[label="1"]
-X3Y1->X3Y2
 }
