@@ -15,7 +15,9 @@ import xml.etree.ElementTree as ET
 opcion = 0
 tree = None
 Matrices = ListaMatrices()
+Matrices_modificar = ListaMatrices()
 MatrizCode = ListaMatrices()
+Matrices_resultante = ListaMatrices()
 def menu():
     global opcion
     print("------Menu Principal------")
@@ -65,13 +67,12 @@ def Cargar_Archivos():
     #MatrizCode = ListaMatrices()
     posicionesCode = None
     c = 0
-    print("IIIIIIIIIIIIIIIIIIII")
-    for i in range(1):
-        print(i)
+    #print("IIIIIIIIIIIIIIIIIIII")
     for datos in root:
         #print("NOMBRE: ",datos.attrib['nombre'], "N:", datos.attrib['n'], "M:",datos.attrib['m'])
         Matrices.insertar(datos.attrib['nombre'],int(datos.attrib['n']),int(datos.attrib['m']))
         MatrizCode.insertar(datos.attrib['nombre'],int(datos.attrib['n']),int(datos.attrib['m']))
+        Matrices_modificar.insertar(datos.attrib['nombre'],int(datos.attrib['n']),int(datos.attrib['m']))
         posiciones = ListaDatos()
         posicionesCode = ListaDatos()
         for subdatos in datos:
@@ -88,8 +89,8 @@ def Cargar_Archivos():
         ameter.datos = posiciones
         ametercode.datos = posicionesCode
     Matrices.mostrardatos()
-    print("-------------CODIFICADA-----------------")
-    MatrizCode.mostrardatos()
+    #print("-------------CODIFICADA-----------------")
+    #MatrizCode.mostrardatos()
         #posiciones.mostrardatos()
     #print(root)
     menu()
@@ -100,13 +101,58 @@ def Procesar_Datos():
     print("----------------------------")
     print("Procesando Datos")
     print("Transformando las matrices")
+    x = 2
+    for i in range(5,10):
+        print(i)
     menu()
 
 def Escribir_Salida():
     print("----------------------------")
     print("Opcion 3")
     print("----------------------------")
+    flag = False
+    filas_pasadas = 0
+    cantidad_Matrices = MatrizCode.getcantidad()
+    print("CANTIDAD MATRICES:",cantidad_Matrices)
+    for k in range(cantidad_Matrices):
+        posicion = 0
+        Matriz_actual = MatrizCode.recorrercadamatriz(k)
+        Modificame = Matrices_modificar.recorrercadamatriz(k)
+        prueba = Matrices.recorrercadamatriz(k)
+        columnas = Matriz_actual.columnas 
+        filas = Matriz_actual.filas
+        todosdatos = Matriz_actual.datos.gettotal()
+        a = 0
+        filas_pasadas = 0
+        desde = columnas
+        hasta = columnas+columnas
+        print("NOMBRE MATRIZ:", prueba.nombre)
+        #for j in range(todosdatos):
+        #Modificame.datos.eliminarnodo(desde, hasta)
+        prueba.datos.eliminarnodo(desde, hasta)
+        prueba.datos.mostrardatos()
 
+
+
+
+    '''for k in range(cantidad_Matrices):
+        posicion = 0
+        Matriz_actual = MatrizCode.recorrercadamatriz(k)
+        columnas = Matriz_actual.columnas 
+        filas = Matriz_actual.filas
+        for l in range(columnas):
+            valorfilas = Matriz_actual.datos.recorrercadan(k)
+            valorfilas_actual = valorfilas.valor
+            cantidaddatos = Matriz_actual.datos.gettotal()
+            jota = 0
+            for j in (filas):
+                c = 5'''
+
+
+    menu()
+
+
+    #Matriz_temporal
 
 def Mostrar_Datos():
     print("----------------------------")
@@ -126,7 +172,8 @@ def Grafica():
     f = None
     try:    
         f = Matrices.getNodoMatriz(x).nombre
-        print("F:",f)
+        print("Ya se ha graficado la matriz:",f)
+        print("Revise en esta misma carpeta la imágen")
     except:
         print("No se ha ingresado el nombre correctamente")  
         menu()  
@@ -141,31 +188,36 @@ def Grafica():
         tamanio = Grafo.datos.gettotal()
         columnas = Grafo.columnas
         filas = Grafo.filas
-        print("FILAS:", Grafo.filas,"COLUMNAS:",Grafo.columnas)
-        print("TAMAÑO:",tamanio,"COLUMNAS:",columnas)
-        print("IIIIIIIIIIIIIIII")
+        #print("FILAS:", Grafo.filas,"COLUMNAS:",Grafo.columnas)
+        #print("TAMAÑO:",tamanio,"COLUMNAS:",columnas)
+        #print("IIIIIIIIIIIIIIII")
         valor = None
         filas_pasada = 0
         for i in range(columnas):
-            print("I:", i)
-            print("X")
+            #print("I:", i)
+            #print("X")
             valorfilas = Grafo.datos.recorrercadan(filas_pasada)
-            print("VALORX:",valorfilas) 
+            valorfilasactual = valorfilas.valor
+            #print("VALORX:",valorfilas) 
             jota = 0
             col = "X"+str(i)
-            mensaje += col+"[label=\""+str(valorfilas)+"\"]"+"\n"
+            mensaje += col+"[label=\""+str(valorfilasactual)+"\"]"+"\n"
             mensaje += str(f)+"->"+col+"\n"
             for j in range(filas):
-                print("J:",j)
-                print("Y")
+                #print("J:",j)
+                #print("Y")
                 jota += columnas
                 recorrido_columna = Grafo.datos.recorrerm(filas_pasada,jota,Grafo.filas)
-                print("VALORY:",recorrido_columna)
+                if recorrido_columna is None:
+                    l=0
+                else:
+                    valoractual = recorrido_columna.valor
+                #print("VALORY:",recorrido_columna)
                 fil = "X"+str(i)+"Y"+str(j)
                 if recorrido_columna is None:
                     l= 0
                 else:    
-                    mensaje += fil+"[label=\""+str(recorrido_columna)+"\"]"+"\n"
+                    mensaje += fil+"[label=\""+str(valoractual)+"\"]"+"\n"
                     if j == 0:
                         mensaje += col+"->"+fil+"\n"
                     else:
@@ -176,6 +228,7 @@ def Grafica():
         file.write(mensaje)
         file.close()
         os.system('dot -Tjpg grafica.dot -o grafica.png')
+        menu()
 
 def Salir():
     print("----------------------------")

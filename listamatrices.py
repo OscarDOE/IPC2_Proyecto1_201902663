@@ -1,5 +1,4 @@
 from matrices import matriz
-from matrizcodificada import codificada
 class ListaMatrices:
     def __init__(self):
         self.primero = None
@@ -13,7 +12,9 @@ class ListaMatrices:
             while temporal.siguiente is not None:
                 temporal = temporal.siguiente
             temporal.siguiente = nuevo 
+            nuevo.anterior = temporal
     #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\x.xml
+    #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\y.xml
     def mostrardatos(self):
         temporal = self.primero
         while temporal is not None:
@@ -34,7 +35,7 @@ class ListaMatrices:
             temporal = temporal.siguiente
         return None    
 
-    def getcantidad():
+    def getcantidad(self):
         temporal = self.primero
         contador = 0
         while temporal is not None:
@@ -49,3 +50,21 @@ class ListaMatrices:
             print("NOMBRE:",temporal.nombre)
             temporal = temporal.siguiente    
             
+    def recorrercadamatriz(self,pasadas):
+        temporal = self.primero
+        i = 0
+        while temporal is not None:
+            if i == pasadas:
+                return temporal
+            else:
+                i += 1    
+            temporal = temporal.siguiente
+
+    def eliminartodo(self):
+        self.primero = None
+
+    def eliminarnodo(self, nodo):
+        temporal = self.primero
+        i = 0
+        while temporal is not None:
+            temporal = temporal.siguiente   

@@ -6,3 +6,4 @@ class matriz:
         self.columnas = columnas
         self.datos = ListaDatos()
         self.siguiente = None
+        self.anterior = None
