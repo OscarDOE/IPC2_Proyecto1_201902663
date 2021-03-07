@@ -5,8 +5,8 @@ class ListaMatricesResultantes:
         self.primero = None
 
 
-    def insertar(self,nombre):
-        nuevo = matriz(nombre)
+    def insertar(self,nombre, columnas):
+        nuevo = matriz(nombre, columnas)
         if self.primero is None:
             self.primero = nuevo
         else: 
@@ -20,10 +20,12 @@ class ListaMatricesResultantes:
     def mostrardatos(self):
         temporal = self.primero
         while temporal is not None:
-            print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas,"GRUPOS:",temporal.gruposexistentes)
             print("-----------------DATOS-------------------")
             if(temporal.datos.mostrardatos() != None):
                 print(temporal.datos.mostrardatos())
+            if (temporal.grupos.mostrardatos() != None):
+                print(temporal.grupos.mostrardatos())    
             print("-----------------------------------------")
             #while tmp is not None:
              #   print("X:",tmp.datos.)
@@ -71,4 +73,24 @@ class ListaMatricesResultantes:
         while temporal is not None:
             temporal = temporal.siguiente   
 
+
+    def mensajexml(self):
+        temporal = self.primero
+        mensaje = "<Matrices_Resultantes>\n"
+        while temporal is not None:
+            print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            print("-----------------DATOS-------------------")
+            mensaje += "    <Matriz nombre=\""+str(temporal.nombre)+"\" n=\""+str(temporal.filas)+"\" m=\""+str(temporal.columnas)+"\">\n"
+            if(temporal.datos.mostrardatos() != None):
+                a = temporal.datos.mensajexml(mensaje)
+                print(temporal.datos.mostrardatos())
+            if (temporal.grupos.mostrardatos() != None):
+                b = temporal.grupos.
+                print(temporal.grupos.mostrardatos())    
+            print("-----------------------------------------")
+            #while tmp is not None:
+             #   print("X:",tmp.datos.)
+            mensaje += "    </Matriz>"
+            temporal = temporal.siguiente
+        return mensaje    
             

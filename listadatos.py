@@ -138,23 +138,4 @@ class ListaDatos:
                 eliminando.siguiente = None
                 eliminando.anterior = None
             temporal = temporal.siguiente    
-                    
-
-            '''elif i >= desde and i < hasta:
-                auxiliar = temporal
-                if temporal.siguiente is not None:
-                    temporal.siguiente.anterior = temporal.anterior
-                    temporal.anterior.siguiente = temporal.siguiente
-                    auxiliar.siguiente = None
-                    temporal = auxiliar.anterior
-                    auxiliar.anterior = None
-                else:
-                    temporal = None    
-            else:
-                print("SE PASO?")
-                break   
-            if temporal == None:
-                break
-            else: 
-                temporal = temporal.siguiente'''
-
+                

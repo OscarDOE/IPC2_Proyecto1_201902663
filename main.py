@@ -2,6 +2,7 @@ from listadatos import ListaDatos
 from listamatrices import ListaMatrices
 from ListaMatrizResultante import ListaMatricesResultantes
 from ListaDatosResultante import ListaDatosResultantes
+from listagrupos import ListaGrupos
 import sys
 import os
 import xml.etree.ElementTree as ET
@@ -20,6 +21,10 @@ Matrices = ListaMatrices()
 Matrices_modificar = ListaMatrices()
 MatrizCode = ListaMatrices()
 Resultante = ListaMatricesResultantes()
+
+desalida = ET
+
+
 def menu():
     global opcion
     print("------Menu Principal------")
@@ -114,8 +119,6 @@ def Procesar_Datos():
 
 
 
-
-
 def Escribir_Salida():
     print("----------------------------")
     print("Opcion 3")
@@ -124,13 +127,18 @@ def Escribir_Salida():
     cantidad_Matrices = MatrizCode.getcantidad()
     print("CANTIDAD MATRICES:",cantidad_Matrices)
     for k in range(cantidad_Matrices):
+        Listaparametergrupos = None
+        Listaparametergrupos = ListaGrupos()
         posicion = 0
         Codigo_actual = MatrizCode.recorrercadamatriz(k)
         #Modificame = Matrices_modificar.recorrercadamatriz(k)
         #k es la matriz en la que va
         prueba = Matrices.recorrercadamatriz(k)
-        MRestultante = ListaMatricesResultantes()
-        MRestultante.insertar(prueba.nombre+"SALIDA")
+        
+        Resultante.insertar(prueba.nombre+"SALIDA",prueba.columnas)
+        Listaparameter = None
+        Listaparameter = ListaDatosResultantes()
+
         columnas = prueba.columnas 
         filas = prueba.filas
         todosdatos = prueba.datos.gettotal()
@@ -139,8 +147,12 @@ def Escribir_Salida():
         #comparando = 0
         fillaa = 1
         # Recorriendo las filas que se van a comparar
-        for i in range(filas):
-            reparando = 0
+        ffffffff = 1
+
+        grupos = filas
+        for i in range(filas):            
+            frecuencia = 1
+            
             Listitatemporalcomparar = None
             Listitatemporalcomparar = ListaDatos()
             LTemporalC = None
@@ -160,6 +172,7 @@ def Escribir_Salida():
                         LTemporalC.insertar(ingresandoC.x, ingresandoC.y, ingresandoC.valor, ingresandoC.filas, ingresandoC.columnas, ingresandoC.nombrematriz)
                         Listitatemporalcomparar.insertar(ingresando.x, ingresando.y, ingresando.valor, ingresando.filas, ingresando.columnas, ingresando.nombrematriz)
             if banderita == True:
+                
                 fillaa += 1
                 continue
             else:
@@ -181,17 +194,17 @@ def Escribir_Salida():
                             B = Codigo_actual.datos.getNodoFila(j+1, l+1)
                             C = prueba.datos.getNodoFila(j+1,l+1)
                             D = Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1)
-                            print("ACODE:" ,str(A.valor)+" X:",str(A.x)+" Y:",str(A.y)+"VALOR REAL:", str(D.valor))
-                            print("BCODE:", str(B.valor)+" X:",str(B.x)+" Y:",str(B.y)+"VALOR REAL:", str(C.valor))
-
+                            #print("ACODE:" ,str(A.valor)+" X:",str(A.x)+" Y:",str(A.y)+"VALOR REAL:", str(D.valor))
+                            #print("BCODE:", str(B.valor)+" X:",str(B.x)+" Y:",str(B.y)+"VALOR REAL:", str(C.valor))
                             if A.valor == B.valor:
                                 flag = True
                             else:
                                 flag = False
                                 break
-                        print("FLAG:",flag)
+                        #print("FLAG:",flag)
 
                         if flag == True:
+                            frecuencia += 1
                             for l in range(columnas):
                                 A = LTemporalC.getNodoFila(LTemporalC.primero.x, l+1)
                                 B = Codigo_actual.datos.getNodoFila(j, l+1)
@@ -200,16 +213,53 @@ def Escribir_Salida():
                                 Codigo_actual.datos.getNodoFila(j+1, l+1).flag = True
                                 Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor += C.valor
                                 print("LA SUMA DE LOS 2 NUMEROS ES: ", Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor, "-----------")
-                                #Codigo_actual.datos.eliminarfila(j, l+1)
-                                #prueba.datos.eliminarfila(j, l+1)
-            #ameter = 
+                            grupos -= 1    
 
+            
+            p = Resultante.getNodoMatriz(prueba.nombre+"SALIDA")
+            print("---------------------------------")
+            print("---------------------------------")
+            print("---------------------------------")
+            print("GRUPOS:", grupos)
+            print("GRUPO:",ffffffff)
+            print("FRECUENCIA:",frecuencia)
+            print("---------------------------------")
+            print("---------------------------------")
+            print("---------------------------------")
+
+            Listaparametergrupos.insertar(ffffffff, frecuencia)
+            for q in range(columnas):
+
+                x = Listitatemporalcomparar.recorrercadan(q)
+                Listaparameter.insertar(ffffffff, q+1, x.valor, prueba.nombre+"SALIDA",columnas)
+                print(x.valor)
+            
+            ffffffff += 1  
+
+
+        ameter = Resultante.getNodoMatriz(prueba.nombre+"SALIDA")
+        ameter.filas = grupos
+        ameter.gruposexistentes = grupos
+        ameter.datos = Listaparameter
+        ameter.grupos = Listaparametergrupos
+        
+        print("-----------------------------------")
+        print("IMPRIMIENDO LA MATRIZ RESULTANTE")
+        print("-----------------------------------")
+        Resultante.mostrardatos()
         #prueba.datos.eliminarnodo(desde, hasta)
         #prueba.datos.mostrardatos()
+    completarresultado()    
     menu()
 
 
 
+
+
+    def completarresultado():
+        print("Se está creando el archivo .xml")
+        file = open("salida.xml","w")
+        file.close()
 
 
 
@@ -314,45 +364,3 @@ def Salir():
     print("Cerrando Programa")
     sys.exit()
 menu()
-'''# i es la fila principal que compara
-        print("NOMBRE:",prueba.nombre+"--------------------------")
-        for i in range(filas):
-            #Estas filas son las que se recorreran para compararse con la 
-            #que se esta comparando
-            filas_corriendo = 0
-            # j es la fila
-            for j in range(filas-1):
-                #Este es el dato de la fila en la que esta en cada columna
-                va_en_fila = 0
-                for l in range(columnas):
-                    a = Matriz_codigo_actual.datos.recorrercadan((fila_comparando*columnas)+va_en_fila)
-                    a_valor = a.valor
-                    b = Matriz_codigo_actual.datos.recorrercadan((filas_corriendo*columnas)+columnas+va_en_fila)
-
-                    b_valor = b.valor
-                    xx = prueba.datos.recorrercadan((fila_comparando*columnas)+va_en_fila)
-                    xx_valor = xx.valor
-                    xxx = prueba.datos.recorrercadan((filas_corriendo*columnas)+columnas+va_en_fila)
-                    xxx_valor = xxx.valor
-
-                    if a_valor == b_valor:
-                        print("ENCONTRO IGUALACION")
-                        print("XX:",xx_valor,"XXX:",xxx_valor)
-                        print("A:",a_valor,"B:",b_valor)
-                        print("CERRO IGUALACION")
-                        flag = True
-                    else:
-                        print("FLAG == FALSE")
-                        print("XX:",xx_valor,"XXX:",xxx_valor)
-                        print("A:",a_valor,"B:",b_valor)
-                        print("CERRO FALSE")
-                        flag = False
-                        filas_corriendo += 1
-                        break    
-                    va_en_fila += 1
-
-
-                filas_corriendo += 1
-
-
-            fila_comparando +=1'''

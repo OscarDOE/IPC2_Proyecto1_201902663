@@ -4,8 +4,8 @@ class ListaDatosResultantes:
     def __init__(self):
         self.primero = None
 
-    def insertar(self,x, y, valor, nombrematriz):
-        nuevo = posicion(x,y,valor, nombrematriz)
+    def insertar(self,x, y, valor, nombrematriz, columnas):
+        nuevo = posicion(x,y,valor, nombrematriz, columnas)
         if self.primero is None:
             self.primero = nuevo
         else: 
@@ -14,6 +14,11 @@ class ListaDatosResultantes:
                 temporal = temporal.siguiente
             temporal.siguiente = nuevo    
             nuevo.anterior = temporal
+
+
+    #def insertarvarios(self):
+
+
     
     def mostrardatos(self):
         temporal = self.primero
@@ -118,20 +123,9 @@ class ListaDatosResultantes:
             else:
                 break
 
-            '''elif i >= desde and i < hasta:
-                auxiliar = temporal
-                if temporal.siguiente is not None:
-                    temporal.siguiente.anterior = temporal.anterior
-                    temporal.anterior.siguiente = temporal.siguiente
-                    auxiliar.siguiente = None
-                    temporal = auxiliar.anterior
-                    auxiliar.anterior = None
-                else:
-                    temporal = None    
-            else:
-                print("SE PASO?")
-                break   
-            if temporal == None:
-                break
-            else: 
-                temporal = temporal.siguiente'''
+    def mensajexml(self,mensaje):
+        temporal = self.primero
+        while temporal is not None:
+            print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            mensaje += "        <Dato x=\""+str(temporal.x)+"\" y=\""+str(temporal.y)+"\">"+str(temporal.valor)+"</Dato>\n"
+            temporal = temporal.siguiente
