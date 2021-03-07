@@ -123,9 +123,17 @@ class ListaDatosResultantes:
             else:
                 break
 
-    def mensajexml(self,mensaje):
+    def mensajexml(self):
+        print("-------------------------DATOS------------------------")
         temporal = self.primero
+        #m = mensaje
+        a = ""
         while temporal is not None:
-            print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
-            mensaje += "        <Dato x=\""+str(temporal.x)+"\" y=\""+str(temporal.y)+"\">"+str(temporal.valor)+"</Dato>\n"
+            #print("LLEGO A DATOS")
+            #print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            a += "        <Dato x=\""+str(temporal.x)+"\" y=\""+str(temporal.y)+"\">"+str(temporal.valor)+"</Dato>\n"
+            #print("-----------------------MENSAJE-----------------------")
+            #print("-----------------------CIERRA MENSAJE-----------------------")
             temporal = temporal.siguiente
+           
+        return a

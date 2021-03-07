@@ -20,3 +20,15 @@ class ListaGrupos:
         while temporal is not None:
             print("GRUPO:",temporal.grupo,"FRECUENCIA:",temporal.frecuencia)
             temporal = temporal.siguiente        
+
+    def mensajexml(self):
+        print("-------------------------------------------GRUPOS----------------------------------")
+        temporal = self.primero
+        #m = mensaje
+        a = ""
+        while temporal is not None:
+            #print("LLEGO A GRUPOS")
+            #print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            a += "        <Frecuencia g=\""+str(temporal.grupo)+"\">"+str(temporal.frecuencia)+"</Frecuencia>\n"
+            temporal = temporal.siguiente     
+        return a 

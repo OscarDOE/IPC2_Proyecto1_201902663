@@ -77,20 +77,33 @@ class ListaMatricesResultantes:
     def mensajexml(self):
         temporal = self.primero
         mensaje = "<Matrices_Resultantes>\n"
+        #print("<Matrices_Resultantes>\n")
+        #mensaje +="XXXXXXXXXXXXXXXXXXXXXXXXX"
+        a = ""
+        b = ""
         while temporal is not None:
-            print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
-            print("-----------------DATOS-------------------")
-            mensaje += "    <Matriz nombre=\""+str(temporal.nombre)+"\" n=\""+str(temporal.filas)+"\" m=\""+str(temporal.columnas)+"\">\n"
-            if(temporal.datos.mostrardatos() != None):
-                a = temporal.datos.mensajexml(mensaje)
-                print(temporal.datos.mostrardatos())
-            if (temporal.grupos.mostrardatos() != None):
-                b = temporal.grupos.
-                print(temporal.grupos.mostrardatos())    
-            print("-----------------------------------------")
+            #print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
+            #print("-----------------DATOS-------------------")
+            mensaje += "    <Matriz nombre=\""+str(temporal.nombre)+"\" n=\""+str(temporal.filas)+"\" m=\""+str(temporal.columnas)+"\" g=\""+str(temporal.gruposexistentes)+"\">\n"
+            #if(temporal.datos.mensajexml(mensaje) != None):
+            a = temporal.datos.mensajexml()
+            print("-------------------A-------------------------")
+            print(a)
+            print("---------------------------------------------")
+                #print(temporal.datos.mostrardatos())
+                #x = 0
+            #if (temporal.grupos.mensajexml(mensaje) != None):
+             #   x = 0
+            b = temporal.grupos.mensajexml()
+                #print(temporal.grupos.mostrardatos())    
+            #print("-----------------------------------------")
             #while tmp is not None:
              #   print("X:",tmp.datos.)
-            mensaje += "    </Matriz>"
+            mensaje += a
+            mensaje += b
+            mensaje += "    </Matriz>\n"
             temporal = temporal.siguiente
-        return mensaje    
+
+        mensaje += "</Matrices_Resultantes>\n"
+        return mensaje 
             

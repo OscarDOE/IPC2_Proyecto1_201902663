@@ -125,7 +125,7 @@ def Escribir_Salida():
     print("----------------------------")
     flag = False
     cantidad_Matrices = MatrizCode.getcantidad()
-    print("CANTIDAD MATRICES:",cantidad_Matrices)
+    #print("CANTIDAD MATRICES:",cantidad_Matrices)
     for k in range(cantidad_Matrices):
         Listaparametergrupos = None
         Listaparametergrupos = ListaGrupos()
@@ -142,7 +142,7 @@ def Escribir_Salida():
         columnas = prueba.columnas 
         filas = prueba.filas
         todosdatos = prueba.datos.gettotal()
-        print("NOMBRE MATRIZ:", prueba.nombre+"------------------------")
+        #print("NOMBRE MATRIZ:", prueba.nombre+"------------------------")
         #Estas filas son las que se tendran en cuenta para comparar
         #comparando = 0
         fillaa = 1
@@ -158,7 +158,7 @@ def Escribir_Salida():
             LTemporalC = None
             LTemporalC = ListaDatos()
             #Guardando la fila simple a comparar
-            print("FILA:",str(fillaa)+"---------------")
+            #print("FILA:",str(fillaa)+"---------------")
             banderita = False
             for j in range(columnas):
                 ingresando = prueba.datos.getNodoFila(fillaa,j+1)
@@ -176,8 +176,8 @@ def Escribir_Salida():
                 fillaa += 1
                 continue
             else:
-                print("LISTITATEMPORALCOMPARAR:")
-                Listitatemporalcomparar.mostrardatos()
+                #print("LISTITATEMPORALCOMPARAR:")
+                #Listitatemporalcomparar.mostrardatos()
                 fillaa += 1
                 f = 0
                 # Filas a comparar con la que se quiere comparar
@@ -212,27 +212,27 @@ def Escribir_Salida():
                                 D = Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1)
                                 Codigo_actual.datos.getNodoFila(j+1, l+1).flag = True
                                 Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor += C.valor
-                                print("LA SUMA DE LOS 2 NUMEROS ES: ", Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor, "-----------")
+                                #print("LA SUMA DE LOS 2 NUMEROS ES: ", Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor, "-----------")
                             grupos -= 1    
 
             
             p = Resultante.getNodoMatriz(prueba.nombre+"SALIDA")
-            print("---------------------------------")
-            print("---------------------------------")
-            print("---------------------------------")
-            print("GRUPOS:", grupos)
-            print("GRUPO:",ffffffff)
-            print("FRECUENCIA:",frecuencia)
-            print("---------------------------------")
-            print("---------------------------------")
-            print("---------------------------------")
+            #print("---------------------------------")
+            #print("---------------------------------")
+            #print("---------------------------------")
+            #print("GRUPOS:", grupos)
+            #print("GRUPO:",ffffffff)
+            #print("FRECUENCIA:",frecuencia)
+            #print("---------------------------------")
+            #print("---------------------------------")
+            #print("---------------------------------")
 
             Listaparametergrupos.insertar(ffffffff, frecuencia)
             for q in range(columnas):
 
                 x = Listitatemporalcomparar.recorrercadan(q)
                 Listaparameter.insertar(ffffffff, q+1, x.valor, prueba.nombre+"SALIDA",columnas)
-                print(x.valor)
+                #print(x.valor)
             
             ffffffff += 1  
 
@@ -243,23 +243,31 @@ def Escribir_Salida():
         ameter.datos = Listaparameter
         ameter.grupos = Listaparametergrupos
         
-        print("-----------------------------------")
-        print("IMPRIMIENDO LA MATRIZ RESULTANTE")
-        print("-----------------------------------")
-        Resultante.mostrardatos()
-        #prueba.datos.eliminarnodo(desde, hasta)
-        #prueba.datos.mostrardatos()
-    completarresultado()    
+        #print("-----------------------------------")
+        #print("IMPRIMIENDO LA MATRIZ RESULTANTE")
+        #print("-----------------------------------")
+        #Resultante.mostrardatos()
+
+    print("Se estan mostrando las resultantes")
+    Resultante.mostrardatos()
+    print("Se está creando el archivo .xml")
+    file = open("salida.xml","w")
+    mensaje = Resultante.mensajexml()
+    file.write(mensaje)
+    file.close() 
     menu()
 
 
 
 
 
-    def completarresultado():
-        print("Se está creando el archivo .xml")
-        file = open("salida.xml","w")
-        file.close()
+    #def completarresultado():
+     #   print("Se está creando el archivo .xml")
+      #  file = open("salida.xml","w")
+       # mensaje = Resultante.mensajexml()
+        #file.write(mensaje)
+        #file.close()
+        #menu()
 
 
 
