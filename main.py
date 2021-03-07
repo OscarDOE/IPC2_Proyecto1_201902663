@@ -19,7 +19,7 @@ tree = None
 Matrices = ListaMatrices()
 Matrices_modificar = ListaMatrices()
 MatrizCode = ListaMatrices()
-Resultante = ListaMatrices()
+Resultante = ListaMatricesResultantes()
 def menu():
     global opcion
     print("------Menu Principal------")
@@ -103,17 +103,10 @@ def Procesar_Datos():
     print("----------------------------")
     print("Procesando Datos")
     print("Transformando las matrices")
+    #a = Matrices.getNodoMatriz("EJEMPLO")
+    #a.datos.eliminarfila(2, 1)
+    #a.datos.mostrardatos()
     menu()
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -136,7 +129,8 @@ def Escribir_Salida():
         #Modificame = Matrices_modificar.recorrercadamatriz(k)
         #k es la matriz en la que va
         prueba = Matrices.recorrercadamatriz(k)
-        Resultante = ListaMatrices()
+        MRestultante = ListaMatricesResultantes()
+        MRestultante.insertar(prueba.nombre+"SALIDA")
         columnas = prueba.columnas 
         filas = prueba.filas
         todosdatos = prueba.datos.gettotal()
@@ -146,115 +140,69 @@ def Escribir_Salida():
         fillaa = 1
         # Recorriendo las filas que se van a comparar
         for i in range(filas):
+            reparando = 0
             Listitatemporalcomparar = None
             Listitatemporalcomparar = ListaDatos()
             LTemporalC = None
             LTemporalC = ListaDatos()
             #Guardando la fila simple a comparar
             print("FILA:",str(fillaa)+"---------------")
+            banderita = False
             for j in range(columnas):
                 ingresando = prueba.datos.getNodoFila(fillaa,j+1)
                 ingresandoC = Codigo_actual.datos.getNodoFila(fillaa, j+1)
-                if ingresando == None:
-                    pass
+                if ingresandoC.flag == True:
+                    banderita = True
                 else:
-                    LTemporalC.insertar(ingresandoC.x, ingresandoC.y, ingresandoC.valor, ingresandoC.filas, ingresandoC.columnas, ingresandoC.nombrematriz)
-                    Listitatemporalcomparar.insertar(ingresando.x, ingresando.y, ingresando.valor, ingresando.filas, ingresando.columnas, ingresando.nombrematriz)
-            
-            print("LISTITATEMPORALCOMPARAR:")
-            Listitatemporalcomparar.mostrardatos()
-            fillaa += 1
-            f = 0
-            
-            for j in range(filas):
-                print("TEMPORAL.PRIMERO:",LTemporalC.primero.x)
-                print("j+1:",j+1, "j:",j)
-                if LTemporalC.primero.x >= j+1:
-                    pass
-                else:
-                    for l in range(columnas):
-                        A = LTemporalC.getNodoFila(LTemporalC.primero.x, l+1)
-                        B = Codigo_actual.datos.getNodoFila(j+1, l+1)
-                        C = prueba.datos.getNodoFila(j+1,l+1)
-                        D = Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1)
-                        print("ACODE:" ,str(A.valor)+" X:",str(A.x)+" Y:",str(A.y)+"VALOR REAL:", str(D.valor))
-                        print("BCODE:", str(B.valor)+" X:",str(B.x)+" Y:",str(B.y)+"VALOR REAL:", str(C.valor))
-
-                        if A.valor == B.valor:
-                            flag = True
-                        else:
-                            flag = False
-                            break
-                    print("FLAG:",flag)
-
-                    if flag == True:
+                    if ingresando == None:
+                        pass
+                    else:
+                        LTemporalC.insertar(ingresandoC.x, ingresandoC.y, ingresandoC.valor, ingresandoC.filas, ingresandoC.columnas, ingresandoC.nombrematriz)
+                        Listitatemporalcomparar.insertar(ingresando.x, ingresando.y, ingresando.valor, ingresando.filas, ingresando.columnas, ingresando.nombrematriz)
+            if banderita == True:
+                fillaa += 1
+                continue
+            else:
+                print("LISTITATEMPORALCOMPARAR:")
+                Listitatemporalcomparar.mostrardatos()
+                fillaa += 1
+                f = 0
+                # Filas a comparar con la que se quiere comparar
+                for j in range(filas):
+                    #print("TEMPORAL.PRIMERO:",LTemporalC.primero.x)
+                    #print("j+1:",j+1, "j:",j)
+                    if LTemporalC.primero.x >= j+1:
+                        pass
+                    else:
+                        # recorre cada columna de la fila
+                        ###################################################
                         for l in range(columnas):
                             A = LTemporalC.getNodoFila(LTemporalC.primero.x, l+1)
-                            B = Codigo_actual.datos.getNodoFila(j, l+1)
-                            C = prueba.datos.getNodoFila(j+1, l+1)
+                            B = Codigo_actual.datos.getNodoFila(j+1, l+1)
+                            C = prueba.datos.getNodoFila(j+1,l+1)
                             D = Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1)
+                            print("ACODE:" ,str(A.valor)+" X:",str(A.x)+" Y:",str(A.y)+"VALOR REAL:", str(D.valor))
+                            print("BCODE:", str(B.valor)+" X:",str(B.x)+" Y:",str(B.y)+"VALOR REAL:", str(C.valor))
 
-                            Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor += C.valor
-                            print("LA SUMA DE LOS 2 NUMEROS ES: ", Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor, "-----------")
+                            if A.valor == B.valor:
+                                flag = True
+                            else:
+                                flag = False
+                                break
+                        print("FLAG:",flag)
 
-
-
-
-        '''
-        #desde = columnas
-        #hasta = columnas+columnas
-#para recorrer cada fila y comparar esa como si fuera la primera
-        for j in range(filas):
-            #a = Matriz_actual.datos.recorrercadan(filas_pasadas)
-            #valor_a = a.valor
-            #fila_comparar = 0
-            comparando = 0
-#recorro las otras filas para comparar
-            for y in range(filas-1):
-                va_en_fila = 0
-#recorro columnas para comparar y ver si son los mismo valores
-                for z in range(columnas):
-                    print("POSICION COLUMNA:",z)
-                    print("FILA QUE RECORRE:", y)
-                    a = Matriz_codigo_actual.datos.recorrercadan(va_en_fila)
-                    valor_a = a.valor
-                    b = Matriz_codigo_actual.datos.recorrercadan((comparando*columnas)+columnas+va_en_fila)
-                    valor_b = b.valor
-
-                    x = prueba.datos.recorrercadan(va_en_fila)
-                    x_valor = x.valor
-                    xx = prueba.datos.recorrercadan((comparando*columnas)+columnas+va_en_fila)
-                    xx_valor = xx.valor
-                    if valor_a == valor_b:
-                        print("ENCONTRO IGUALACION")
-                        print("X:",x_valor,"XX:",xx_valor)
-                        print("A:",valor_a,"B:",valor_b)
-                        print("CERRO IGUALACION")
-                        flag = True
-                    else:
-                        print("FLAG == FALSE")
-                        print("X:",x_valor,"XX:",xx_valor)
-                        print("A:",valor_a,"B:",valor_b)
-                        print("CERRO FALSE")
-                        flag = False
-                        comparando += 1
-                        break
-                    va_en_fila += 1'''
-                    
-        '''if flag == True:
-                    viene_en_fila = 0
-                    for z in range(columnas):
-                        c = Modificame.datos.recorrercadan(viene_en_fila)
-                        valor_c = c.valor
-                        d = Modificame.datos.recorrercadan((comparando*columnas)+columnas+viene_en_fila)
-                        d_valor = d.valor
-                        c = c+d
-                        viene_en_fila += 1    
-                    desde = (comparando*columnas)+columnas
-                    hasta = desde +columnas    
-                    Modificame.datos.eliminar_nodo_desde_hasta(desde, hasta)
-                comparando += 1'''
-                    
+                        if flag == True:
+                            for l in range(columnas):
+                                A = LTemporalC.getNodoFila(LTemporalC.primero.x, l+1)
+                                B = Codigo_actual.datos.getNodoFila(j, l+1)
+                                C = prueba.datos.getNodoFila(j+1, l+1)
+                                D = Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1)
+                                Codigo_actual.datos.getNodoFila(j+1, l+1).flag = True
+                                Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor += C.valor
+                                print("LA SUMA DE LOS 2 NUMEROS ES: ", Listitatemporalcomparar.getNodoFila(LTemporalC.primero.x, l+1).valor, "-----------")
+                                #Codigo_actual.datos.eliminarfila(j, l+1)
+                                #prueba.datos.eliminarfila(j, l+1)
+            #ameter = 
 
         #prueba.datos.eliminarnodo(desde, hasta)
         #prueba.datos.mostrardatos()

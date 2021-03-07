@@ -4,8 +4,8 @@ class ListaDatosResultantes:
     def __init__(self):
         self.primero = None
 
-    def insertar(self,x, y, valor,filas, columnas, nombrematriz):
-        nuevo = posicion(x,y,valor,filas,columnas, nombrematriz)
+    def insertar(self,x, y, valor, nombrematriz):
+        nuevo = posicion(x,y,valor, nombrematriz)
         if self.primero is None:
             self.primero = nuevo
         else: 

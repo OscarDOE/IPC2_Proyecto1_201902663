@@ -28,10 +28,10 @@ class ListaMatrices:
              #   print("X:",tmp.datos.)
             temporal = temporal.siguiente
 
-    def getNodoMatriz(self, valor):
+    def getNodoMatriz(self, nombre):
         temporal = self.primero
         while temporal is not None:
-            if str.lower(temporal.nombre) == str.lower(valor):
+            if str.lower(temporal.nombre) == str.lower(nombre):
                 return temporal
             temporal = temporal.siguiente
         return None    

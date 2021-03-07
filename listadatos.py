@@ -8,9 +8,12 @@ class ListaDatos:
         nuevo = posicion(x,y,valor,filas,columnas, nombrematriz)
         if self.primero is None:
             self.primero = nuevo
+            #self.primero.flag = True
         else: 
             temporal = self.primero    
             while temporal.siguiente is not None:
+                #if temporal.x == 1:
+                    #temporal.flag = True    
                 temporal = temporal.siguiente
             temporal.siguiente = nuevo    
             nuevo.anterior = temporal

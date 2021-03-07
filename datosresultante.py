@@ -1,10 +1,10 @@
 class posicion:
-    def __init__(self, x, y, valor, filas, columnas, nombrematriz):
+    def __init__(self, x, y, valor, nombrematriz):
         self.x = x
         self.y = y
         self.valor = valor
-        self.filas = filas
-        self.columnas = columnas
+        self.filas = None
+        self.columnas = None
         self.nombrematriz = nombrematriz
         self.siguiente = None
         self.anterior = None

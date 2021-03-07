@@ -4,8 +4,9 @@ class ListaMatricesResultantes:
     def __init__(self):
         self.primero = None
 
-    def insertar(self,nombre, filas, columnas):
-        nuevo = matriz(nombre,filas,columnas)
+
+    def insertar(self,nombre):
+        nuevo = matriz(nombre)
         if self.primero is None:
             self.primero = nuevo
         else: 
@@ -16,8 +17,6 @@ class ListaMatricesResultantes:
             nuevo.anterior = temporal
     #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\x.xml
     #C:\Users\elmco\OneDrive\Documentos\GitHub\IPC2_Proyecto1_201902663\y.xml
-    
-    
     def mostrardatos(self):
         temporal = self.primero
         while temporal is not None:
@@ -71,3 +70,5 @@ class ListaMatricesResultantes:
         i = 0
         while temporal is not None:
             temporal = temporal.siguiente   
+
+            
