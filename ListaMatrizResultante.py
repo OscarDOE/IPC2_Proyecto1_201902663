@@ -84,7 +84,7 @@ class ListaMatricesResultantes:
         while temporal is not None:
             #print("NOMBRE:",temporal.nombre, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
             #print("-----------------DATOS-------------------")
-            mensaje += "    <Matriz nombre=\""+str(temporal.nombre)+"\" n=\""+str(temporal.filas)+"\" m=\""+str(temporal.columnas)+"\" g=\""+str(temporal.gruposexistentes)+"\">\n"
+            mensaje += "    <matriz nombre=\""+str(temporal.nombre)+"\" n=\""+str(temporal.filas)+"\" m=\""+str(temporal.columnas)+"\" g=\""+str(temporal.gruposexistentes)+"\">\n"
             #if(temporal.datos.mensajexml(mensaje) != None):
             a = temporal.datos.mensajexml()
             print("-------------------A-------------------------")
@@ -101,7 +101,7 @@ class ListaMatricesResultantes:
              #   print("X:",tmp.datos.)
             mensaje += a
             mensaje += b
-            mensaje += "    </Matriz>\n"
+            mensaje += "    </matriz>\n"
             temporal = temporal.siguiente
 
         mensaje += "</Matrices_Resultantes>\n"

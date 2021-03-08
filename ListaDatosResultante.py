@@ -131,7 +131,7 @@ class ListaDatosResultantes:
         while temporal is not None:
             #print("LLEGO A DATOS")
             #print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
-            a += "        <Dato x=\""+str(temporal.x)+"\" y=\""+str(temporal.y)+"\">"+str(temporal.valor)+"</Dato>\n"
+            a += "        <dato x=\""+str(temporal.x)+"\" y=\""+str(temporal.y)+"\">"+str(temporal.valor)+"</dato>\n"
             #print("-----------------------MENSAJE-----------------------")
             #print("-----------------------CIERRA MENSAJE-----------------------")
             temporal = temporal.siguiente

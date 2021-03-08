@@ -29,6 +29,6 @@ class ListaGrupos:
         while temporal is not None:
             #print("LLEGO A GRUPOS")
             #print("X:",temporal.x, "Y:", temporal.y, "VALOR:",temporal.valor, "FILAS:", temporal.filas, "COLUMNAS:",temporal.columnas)
-            a += "        <Frecuencia g=\""+str(temporal.grupo)+"\">"+str(temporal.frecuencia)+"</Frecuencia>\n"
+            a += "        <frecuencia g=\""+str(temporal.grupo)+"\">"+str(temporal.frecuencia)+"</frecuencia>\n"
             temporal = temporal.siguiente     
         return a 
